@@ -2,6 +2,7 @@ import re
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import HttpResponse
 from django.conf import settings
+from utils.log import logger
 
 
 class RbacMiddleware(MiddlewareMixin):
@@ -23,7 +24,7 @@ class RbacMiddleware(MiddlewareMixin):
         """
         # 获取请求的URL
         current_url = request.path_info
-        print(current_url)
+        logger.info("当前访问路径为: {}".format(current_url))
         for valid_url in settings.VALID_URL_LIST:
             if re.match(valid_url, current_url):
                 # 白名单中的URL无需权限验证即可访问

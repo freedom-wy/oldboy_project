@@ -128,10 +128,52 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# rbac 权限配置
 PERMISSION_SESSION_KEY = "luffy_permission_url_list_key"
 MENU_SESSION_KEY = "luffy_menu_list_key"
 VALID_URL_LIST = [
     '/login/',
     '/admin/.*'
 ]
+
+# log配置
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'standard': {
+            'format': '[%(levelname)s][%(asctime).19s][%(module)s][%(funcName)s][%(lineno)d][%(threadName)s] : %(message)s '
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+        # 'file': {
+        #     'level': 'WARNING',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(settings.BASE_DIR, 'Docker', 'log', 'viperpython.log'),
+        # },
+
+    },
+    'loggers': {
+        'django': {
+            'handlers': [
+                'console',
+                # 'file',
+            ],
+            'level': 'INFO',
+            'propagate': True  # 是否继承父类的log信息
+        },
+
+    }
+}
 

@@ -1,4 +1,5 @@
 from django.conf import settings
+from utils.log import logger
 
 
 def init_permission(current_user, request):
@@ -34,7 +35,7 @@ def init_permission(current_user, request):
                     "url": item.get("permissions__url")
                 }
             )
-    print(menu_list)
+    logger.info("用户: {}, 权限列表: {}, 菜单列表: {}".format(current_user.name, permission_list, menu_list))
     request.session[settings.PERMISSION_SESSION_KEY] = permission_list
     request.session[settings.MENU_SESSION_KEY] = menu_list
 
