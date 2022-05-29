@@ -1,5 +1,6 @@
 {#{% load staticfiles %}#}
 {% load static %}
+{% load rbac %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,17 +156,7 @@
 <div class="pg-body">
     <div class="left-menu">
         <div class="menu-body">
-            <div class="static-menu">
-                {% for item in request.session.luffy_menu_list_key %}
-                    <a href="{{ item.url }}">
-                        <span class="icon-wrap"><i class="{{ item.icon }}"></i></span> {{ item.title }} </a>
-                {% endfor %}
-{#                <a href="/customer/list/" class="active">#}
-{#                    <span class="icon-wrap"><i class="fa fa-connectdevelop"></i></span> 客户管理</a>#}
-{#                <a href="/payment/list/">#}
-{#                    <span class="icon-wrap"><i class="fa fa-code-fork"></i></span> 账单管理</a>#}
-            </div>
-
+            {% menu request %}
         </div>
     </div>
     <div class="right-body">
