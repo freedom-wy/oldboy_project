@@ -1,6 +1,6 @@
 <div class="static-menu">
     {% for item in menu_list %}
-        <a href="{{ item.url }}">
+        <a href="{{ item.url }}" class="{{ item.active }}">
             <span class="icon-wrap"><i class="{{ item.icon }}"></i></span> {{ item.title }} </a>
     {% endfor %}
 </div>

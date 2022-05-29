@@ -114,6 +114,8 @@ class LoginView(View):
         current_user = UserInfo.objects.filter(name=user, password=pwd).first()
         if not current_user:
             return render(request, "login.html", {"msg": "用户名或密码错误"})
+        # 将用户信息放入session
+        request.session["user_info"] = {"id": current_user.id, "name": current_user.name}
         # 登录后初始化权限
         init_permission(current_user, request)
         return redirect("/customer/list")
